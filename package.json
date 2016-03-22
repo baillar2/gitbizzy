@@ -1,0 +1,30 @@
+{
+  "name": "gitbizzy",
+  "version": "1.0.0",
+  "description": "github business card",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baillar2/gitbizzy.git"
+  },
+  "author": "seanb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/baillar2/gitbizzy/issues"
+  },
+  "homepage": "https://github.com/baillar2/gitbizzy#readme",
+  "dependencies": {
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "mongoose": "^4.4.8",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-github2": "^0.1.10",
+    "passport-local": "^1.0.0"
+  }
+}
