@@ -21,7 +21,31 @@ function newUser(req, res){
 		}
 	})
 }
+function updateUser(req, res){
+	console.log('controller log')
+	User.findByIdAndUpdate({_id:req.body._id}, req.body, function(err, user){
+		if(err){
+			console.log('update error', err)
+		}
+		else{
+			console.log('user updated', user)
+			res.json(user)
+		}
+	})
+}function getUpdate(req, res){
+	User.findOne({_id:req.body._id}, function(err, user){
+		if(err){
+			console.log('couldnt find user')
+		}
+		else{
+			console.log('found user', user)
+			res.json(user)
+		}
+	})
+}
 
 module.exports = {
-	newUser: newUser
+	newUser: newUser, 
+	updateUser: updateUser,
+	getUpdate: getUpdate,
 }

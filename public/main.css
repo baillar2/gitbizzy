@@ -1,0 +1,21 @@
+.card {
+	border: medium solid black;
+	border-radius: 15px;
+	padding: 10%;	
+}
+
+.avatar {
+	height: 200px;
+	border:thin solid black;
+	border-radius: 5px;
+}
+
+.inline {
+	display: inline;
+}
+
+.margin {
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+

@@ -41,7 +41,13 @@ app.get('/', function(req, res){
 app.post('/api/newuser', function(req, res){
 	controller.newUser(req, res)
 })
-	
+app.post('/api/update', function(req, res){
+	console.log('update fired')
+	controller.updateUser(req, res)
+})
+app.post('/api/getUpdate', function(req, res){
+	controller.getUpdate(req, res)
+})
 
 
 

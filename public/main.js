@@ -1,7 +1,5 @@
-angular.module('app',[])
-
 angular.module('app')
-	.controller('bizControl', ['$scope', '$http', function($scope, $http){
+	.controller('bizControl', ['$scope', '$http', 'factory',  function($scope, $http, factory){
 
 		var s = $scope
 		s.login = {}
@@ -11,9 +9,31 @@ angular.module('app')
 				.then(function(serverData){
 					$http.post('/api/newuser', serverData.data)
 						.then(function(serverData){
-							console.log('saved', serverData.data)
+							console.log(serverData.data)
+							s.user = serverData.data
+							console.log('saved user', s.user)
+						})
+
+				})
+				s.login = {}
+		}
+		s.submit = function(){
+			console.log('submit fired', s.user)
+			$http.post('/api/update', s.user)
+				.then(function(serverData){
+					$http.post('/api/getUpdate', serverData.data)
+						.then(function(serverData){
+							console.log('got updated user', serverData.data)
+							s.user = serverData.data	
 						})
 				})
 		}
+
+	}])
+angular.module('app')
+	.controller('formControl', ['$scope', '$http', 'factory',  function($scope, $http, factory){
+		var s = $scope
+		http.get('/api/user')
+
 
 	}])
