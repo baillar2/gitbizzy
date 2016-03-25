@@ -7,11 +7,3 @@ angular.module('app',['ngRoute'])
 			})
 	})
 
-angular.module('app')
-	.factory('factory',[function(){
-		
-		var user = {}
-
-		return user
-
-	}])

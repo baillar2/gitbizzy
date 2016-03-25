@@ -49,7 +49,12 @@ app.post('/api/getUpdate', function(req, res){
 	controller.getUpdate(req, res)
 })
 
-
+app.get('/:login', function(req, res){
+	res.sendFile('/bizcard.html', {root:'./public'})
+})
+app.get('/api/getcard/:login', function(req, res){
+	controller.getCard(req, res)
+})
 
 //listen\\
 var port = 3000

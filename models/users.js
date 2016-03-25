@@ -8,7 +8,8 @@ var userSchema = mongoose.Schema({
 	email : String, 
 	bio : String, 
 	avatar : String,
-	github : String, 
+	github : String,
+	login: String, 
 
 })
 

@@ -9,6 +9,7 @@ function newUser(req, res){
 		email: req.body.email, 
 		avatar: req.body.avatar_url, 
 		github: req.body.html_url,
+		login: req.body.login
 	})
 	person.save(function(err, user){
 		if(err){
@@ -43,9 +44,21 @@ function updateUser(req, res){
 		}
 	})
 }
-
+function getCard(req, res){
+	console.log('req params', req.params.login)
+	User.findOne({login:req.params.login}, function(err, user){
+		if(err){
+			console.log('get card error', err)
+		}
+		else{
+			console.log('got card for ', user)
+			res.json(user)
+		}
+	})
+}
 module.exports = {
 	newUser: newUser, 
 	updateUser: updateUser,
 	getUpdate: getUpdate,
+	getCard: getCard,
 }

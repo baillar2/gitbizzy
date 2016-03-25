@@ -1,5 +1,5 @@
 angular.module('app')
-	.controller('bizControl', ['$scope', '$http', 'factory',  function($scope, $http, factory){
+	.controller('bizControl', ['$scope', '$http', function($scope, $http){
 
 		var s = $scope
 		s.login = {}
@@ -31,9 +31,15 @@ angular.module('app')
 
 	}])
 angular.module('app')
-	.controller('formControl', ['$scope', '$http', 'factory',  function($scope, $http, factory){
+	.controller('cardControl', ['$scope', '$http', function($scope, $http){
 		var s = $scope
-		http.get('/api/user')
+		var login = window.location.pathname.split('/').pop()
+		console.log(login)
+		$http.get('/api/getcard/' + login)
+			.then(function(serverData){
+				console.log('get card', serverData.data)
+				s.user = serverData.data
+			})
 
 
 	}])
