@@ -5,8 +5,10 @@ var mongoose = require('mongoose')
 var controller = require('./controllers/controller.js')
 var logger = require('morgan')
 var express = require('express')
-var key = require('./models/key.js')
+var Key = require('./models/key.js')
 var request = require('request')
+var ClientId = key.ClientId
+var ClientSecret = key.ClientSecret
 //create express app\\
 var app = express()
 mongoose.connect('mongodb://localhost/gitbizzyDB')
@@ -16,7 +18,9 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'))
-
+app.use(session({secret: 'keyboard cat', resave: false, saveUninitialized: false}))
+app.use(passport.initialize())
+app.use(passport.session())
 
 //passport config\\
 var passport = require('passport')
@@ -33,10 +37,33 @@ passport.deserializeUser(function(id, done){
 		done(err, user)
 	})
 })
-
+passport.use(new githubStrategy({
+	clientID : ClientId, 
+	clientSecret : ClientSecret, 
+	callbackURL : 'http://:3000/auth/github/callback'
+	}
+	function(accessToken, refreshToken, profile, done){
+		process.nextTick(fucntion(){
+			return done(null, profile)
+		})
+	}))
 //routes\\
 app.get('/', function(req, res){
 	res.sendFile('/index.html', {root:'./public'})
+})
+app.get('/auth/github',
+	passport.authenticate('github', {scope: ['user:email']})
+		function(req, res){
+
+		})
+app.get('/auth/github/callback', 
+	passport.authenticate('github', {failureRedirect: '/login'})
+	function(req, res){
+		res.redirect('/')
+	})
+app.get('/logout', function(req, res){
+	req.logout(),
+	res.redirect('/')
 })
 app.post('/api/newuser', function(req, res){
 	controller.newUser(req, res)
