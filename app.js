@@ -9,6 +9,8 @@ var Key = require('./models/key.js')
 var request = require('request')
 var ClientId = key.ClientId
 var ClientSecret = key.ClientSecret
+var session = require('express-session')
+var passport = require('passport')
 //create express app\\
 var app = express()
 mongoose.connect('mongodb://localhost/gitbizzyDB')
@@ -23,7 +25,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 //passport config\\
-var passport = require('passport')
 var githubStrategy = require('passport-github2').Strategy 
 var User = require('./models/users.js')
 app.use(passport.initialize())
@@ -40,24 +41,49 @@ passport.deserializeUser(function(id, done){
 passport.use(new githubStrategy({
 	clientID : ClientId, 
 	clientSecret : ClientSecret, 
-	callbackURL : 'http://:3000/auth/github/callback'
-	}
+	callbackURL : '/auth/github/callback' //Changed it to not be hardcoded to the server environment
+	},
 	function(accessToken, refreshToken, profile, done){
-		process.nextTick(fucntion(){
-			return done(null, profile)
-		})
+		// Finding User in database
+		// IF exists, log them in
+		// IF NOT, create them
+		User.findOne({ github : profile.id }, function (err, user) {
+			
+			// Something went horribly wrong in the DB!!!!
+			if(err){
+				return done(err)
+			}
+			
+			// Create user since they don't exist
+			if (!user && profile){
+				var user = new db.user({
+					// Some sample data that matches your model
+					name : profile.displayName,
+					email:profile._json.email,
+					github: profile.id,
+					avatar: profile._json.avatar_url,
+				})
+				user.save();
+				return done(null, user); 
+			}
+			// User exists in DB, use them
+			if(user){ 
+				return done(null, user);  
+			}
+    	});
+		
+		
 	}))
 //routes\\
 app.get('/', function(req, res){
 	res.sendFile('/index.html', {root:'./public'})
 })
 app.get('/auth/github',
-	passport.authenticate('github', {scope: ['user:email']})
-		function(req, res){
+	passport.authenticate('github', {scope: ['user:email']}))
 
-		})
+
 app.get('/auth/github/callback', 
-	passport.authenticate('github', {failureRedirect: '/login'})
+	passport.authenticate('github', {failureRedirect: '/login'}),
 	function(req, res){
 		res.redirect('/')
 	})
