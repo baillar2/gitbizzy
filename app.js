@@ -53,14 +53,15 @@ passport.use(new githubStrategy({
 			
 			// Create new user
 			if (!user && profile){
-				var user = new db.user({			
-					name : profile.displayName,
-					email:profile._json.email,
-					github: profile.id,
-					avatar: profile._json.avatar_url,
-				})
-				user.save();
-				return done(null, user); 
+				console.log(profile)
+				// var user = new User({			
+				// 	name : profile.displayName,
+				// 	email:profile._json.email,
+				// 	github: profile.id,
+				// 	avatar: profile._json.avatar_url,
+				// })
+				// user.save();
+				// return done(null, user); 
 			}
 			// User exists in DB, use them
 			if(user){ 
