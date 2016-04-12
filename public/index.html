@@ -8,11 +8,12 @@
 <body ng-controller="bizControl">
 	<h1>GitBizzy Business Cards</h1>
 	<form class="form-inline" ng-submit="getInfo()">
-		  <div class="form-group">
-		    <label >Name</label>
+		<div class="form-group">
+			<label >Name</label>
 		    <input type="text" class="form-control"  ng-model="login.name"placeholder="GitHub Name">
-		  </div>
-		  <a href="#/bizcard" type="submit" class="btn btn-default" ng-click="getInfo()">Git your Info</a>
+		</div>
+		<a href="#/bizcard" type="submit" class="btn btn-default" ng-click="getInfo()">Git your Info</a>
+		<button class="btn btn-default" ng-click="oauth()">Log In with GitHub</button>
 	</form>
 
 	<div ng-view></div>

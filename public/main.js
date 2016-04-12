@@ -3,6 +3,12 @@ angular.module('app')
 
 		var s = $scope
 		s.login = {}
+		s.oauth = function(){
+			$http.get('/auth/github')
+				.then(function(serverData){
+					console.log('return data', serverData.data)
+				})
+		}
 		s.getInfo = function(){
 			console.log(s.login)
 			$http.get('https://api.github.com/users/' + s.login.name)

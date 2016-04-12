@@ -7,8 +7,8 @@ var logger = require('morgan')
 var express = require('express')
 var Key = require('./models/key.js')
 var request = require('request')
-var ClientId = key.ClientId
-var ClientSecret = key.ClientSecret
+var ClientId = Key.ClientId
+var ClientSecret = Key.ClientSecret
 var session = require('express-session')
 var passport = require('passport')
 //create express app\\
@@ -41,7 +41,7 @@ passport.deserializeUser(function(id, done){
 passport.use(new githubStrategy({
 	clientID : ClientId, 
 	clientSecret : ClientSecret, 
-	callbackURL : '/auth/github/callback' //Changed it to not be hardcoded to the server environment
+	callbackURL : '/auth/github/callback' 
 	},
 	function(accessToken, refreshToken, profile, done){
 		// Finding User in database
@@ -49,15 +49,14 @@ passport.use(new githubStrategy({
 		// IF it does something
 		User.findOne({ github : profile.id }, function (err, user) {
 			
-			// Something went horribly wrong in the DB!!!!
+			// Something is wrong in DB
 			if(err){
 				return done(err)
 			}
 			
-			// Create user since they don't exist
+			// Create new user
 			if (!user && profile){
-				var user = new db.user({
-					// Some sample data that matches your model
+				var user = new db.user({			
 					name : profile.displayName,
 					email:profile._json.email,
 					github: profile.id,
