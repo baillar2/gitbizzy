@@ -46,7 +46,7 @@ passport.use(new githubStrategy({
 	function(accessToken, refreshToken, profile, done){
 		// Finding User in database
 		// IF exists, log them in
-		// 
+		// IF it does something
 		User.findOne({ github : profile.id }, function (err, user) {
 			
 			// Something went horribly wrong in the DB!!!!
