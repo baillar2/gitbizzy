@@ -44,9 +44,6 @@ passport.use(new githubStrategy({
 	callbackURL : '/auth/github/callback' 
 	},
 	function(accessToken, refreshToken, profile, done){
-		// Finding User in database
-		// IF exists, log them in
-		// IF it does something
 		User.findOne({ github : profile.id }, function (err, user) {
 			
 			// Something is wrong in DB
