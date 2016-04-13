@@ -1,41 +1,43 @@
 
-<div class="container">	
-	<form class="form-inline">
-		<div class="form-group">
-			<label>Name</label>
-			<input type="text" class="form-control" placeholder="{{user.name}}" ng-model="user.name">
-		</div>
-		<div class="form-group">
-			<label>Company</label>
-			<input type="text" class="form-control" placeholder="{{user.company}}" ng-model="user.company">
-		</div>
-		<div class="form-group">
-			<label>Location</label>
-			<input type="text" class="form-control" placeholder="{{user.location}}" ng-model="user.location">
-		</div>
-		<div class="form-group">
-			<label>Email</label>
-			<input type="text" class="form-control" placeholder="{{user.email}}" ng-model="user.email">
-		</div>
-		<div class="form-group">
-			<label>GitHub</label>
-			<input type="text" class="form-control" placeholder="{{user.github}}" ng-model="user.github">
-		</div>
-		<input type="submit" ng-click="submit()">
-	</form>
-</div>	
-<div class="container">
-	<div class="row">
-		<div class="col-xs-10 col-xs-offset-1 card">
-			<img class="avatar" src="{{user.avatar}}">
-			<h2 class="inline">{{user.name}}</h2>
-			<h4 class="margin">{{user.company}}</h4>
-			<h5 class="margin">{{user.location}}</h5>
-			<h5 class="margin">{{user.email}}</h5>
-			<h5 class="margin">{{user.github}}</h5>
-		</div>	
+	<div class="container">	
+		<form class="form-inline">
+			<div class="form-group">
+				<label>Name</label>
+				<input type="text" class="form-control" placeholder="{{user.name}}" ng-model="user.name">
+			</div>
+			<div class="form-group">
+				<label>Company</label>
+				<input type="text" class="form-control" placeholder="{{user.company}}" ng-model="user.company">
+			</div>
+			<div class="form-group">
+				<label>Location</label>
+				<input type="text" class="form-control" placeholder="{{user.location}}" ng-model="user.location">
+			</div>
+			<div class="form-group">
+				<label>Email</label>
+				<input type="text" class="form-control" placeholder="{{user.email}}" ng-model="user.email">
+			</div>
+			<div class="form-group">
+				<label>GitHub</label>
+				<input type="text" class="form-control" placeholder="{{user.github}}" ng-model="user.github">
+			</div>
+			<input type="submit" ng-click="submit()">
+		</form>
 	</div>	
-</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-10 col-xs-offset-1 card">
+				<img class="avatar" src="{{user.avatar}}">
+				<h2 class="inline">{{user.name}}</h2>
+				<h4 class="margin">{{user.company}}</h4>
+				<h5 class="margin">{{user.location}}</h5>
+				<h5 class="margin">{{user.email}}</h5>
+				<h5 class="margin">{{user.github}}</h5>
+			</div>	
+		</div>	
+	</div>
+
+
 
 
 

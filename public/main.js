@@ -2,7 +2,6 @@ angular.module('app')
 	.controller('bizControl', ['$scope', '$http', function($scope, $http){
 
 		var s = $scope
-		s.login = {}
 		
 		s.getInfo = function(){
 			console.log(s.login)
@@ -30,6 +29,16 @@ angular.module('app')
 				})
 		}
 
+	}])
+angular.module('app')
+	.controller('formControl', ['$scope', '$http', function($scope, $http){
+
+		var s = $scope
+
+		$http.get('/getUser')
+			.then(function(serverData){
+				
+			})
 	}])
 angular.module('app')
 	.controller('cardControl', ['$scope', '$http', function($scope, $http){

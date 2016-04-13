@@ -3,7 +3,7 @@ angular.module('app',['ngRoute'])
 		$routeProvider
 			.when('/bizcard',{
 				templateUrl: 'form.html',
-				controller: 'bizControl'
+				controller: 'formControl'
 			})
 	})
 

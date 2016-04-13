@@ -1,26 +1,25 @@
 var User = require('../models/users.js')
 
-function newUser(req, res){
+function newUser(profile){
 	var person = new User ({
-		name : req.body.name, 
-		company : req.body.company, 
-		blog: req.body.blog, 
-		location: req.body.location, 
-		email: req.body.email, 
-		avatar: req.body.avatar_url, 
-		github: req.body.html_url,
-		login: req.body.login
+		name : profile.displayName, 
+		company : profile.company, 
+		blog: profile.blog, 
+		location: profile.location, 
+		email: profile.email, 
+		avatar: profile._json.avatar_url, 
+		github: profile.profileUrl,
+		login: profile.username
 	})
 	person.save(function(err, user){
 		if(err){
-			console.log('save error', err)
-			res.send({err:err})
+			console.log('save error', err)	
 		}
 		else{
 			console.log('user saved', user)
-			res.json(user)
 		}
 	})
+	return person
 }
 function updateUser(req, res){
 	console.log('controller log')

@@ -46,22 +46,14 @@ passport.use(new githubStrategy({
 	function(accessToken, refreshToken, profile, done){
 		User.findOne({ github : profile.id }, function (err, user) {
 			
-			// Something is wrong in DB
+
 			if(err){
 				return done(err)
-			}
-			
+			}	
 			// Create new user
 			if (!user && profile){
-				console.log(profile)
-				// var user = new User({			
-				// 	name : profile.displayName,
-				// 	email:profile._json.email,
-				// 	github: profile.id,
-				// 	avatar: profile._json.avatar_url,
-				// })
-				// user.save();
-				// return done(null, user); 
+				console.log('profile', profile._json)
+				return done (null, controller.newUser(profile))
 			}
 			// User exists in DB, use them
 			if(user){ 
@@ -78,19 +70,21 @@ app.get('/', function(req, res){
 app.get('/auth/github',
 	passport.authenticate('github', {scope: ['user:email']}))
 
-
 app.get('/auth/github/callback', 
-	passport.authenticate('github', {failureRedirect: '/login'}),
+	passport.authenticate('github', {failureRedirect: '/'}),
 	function(req, res){
-		res.redirect('/')
+		res.redirect('/#/bizcard')
 	})
+app.get('/getUser',
+	passport.authenticate('github', {failureRedirect: '/'}),
+	)
 app.get('/logout', function(req, res){
 	req.logout(),
 	res.redirect('/')
 })
-app.post('/api/newuser', function(req, res){
-	controller.newUser(req, res)
-})
+// app.post('/api/newuser', function(req, res){
+// 	controller.newUser(req, res)
+// })
 app.post('/api/update', function(req, res){
 	console.log('update fired')
 	controller.updateUser(req, res)
@@ -107,7 +101,7 @@ app.get('/api/getcard/:login', function(req, res){
 })
 
 //listen\\
-var port = 80
+var port = 3000
 app.listen(port, function(){
 	console.log('server running on port ' + port)
 })
