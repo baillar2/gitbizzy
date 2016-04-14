@@ -57,6 +57,7 @@ passport.use(new githubStrategy({
 			}
 			// User exists in DB, use them
 			if(user){ 
+				console.log('if user exists', user)
 				return done(null, user);  
 			}
     	});
@@ -75,9 +76,11 @@ app.get('/auth/github/callback',
 	function(req, res){
 		res.redirect('/#/bizcard')
 	})
-app.get('/getUser',
-	passport.authenticate('github', {failureRedirect: '/'}),
-	)
+app.get('/getUser', function(req, res){
+		console.log('get user on server fired', req.user)
+		controller.getUser(req, res)
+	})
+
 app.get('/logout', function(req, res){
 	req.logout(),
 	res.redirect('/')

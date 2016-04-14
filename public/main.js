@@ -34,10 +34,12 @@ angular.module('app')
 	.controller('formControl', ['$scope', '$http', function($scope, $http){
 
 		var s = $scope
-
+		console.log('getuser fired')
 		$http.get('/getUser')
 			.then(function(serverData){
-				
+				console.log('returned user', serverData.data)
+				s.user = serverData.data
+				console.log('user to be used', s.user)
 			})
 	}])
 angular.module('app')

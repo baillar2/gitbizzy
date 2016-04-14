@@ -43,6 +43,17 @@ function updateUser(req, res){
 		}
 	})
 }
+function getUser(req, res){
+	User.findOne({login:req.user.login}, function(err, user){
+		if(err){
+			console.log('couldnt find user')
+		}
+		else{
+			console.log('found user', user)
+			res.json(user)
+		}
+	})
+}
 function getCard(req, res){
 	console.log('req params', req.params.login)
 	User.findOne({login:req.params.login}, function(err, user){
@@ -60,4 +71,5 @@ module.exports = {
 	updateUser: updateUser,
 	getUpdate: getUpdate,
 	getCard: getCard,
+	getUser: getUser,
 }
