@@ -104,7 +104,7 @@ app.get('/api/getcard/:login', function(req, res){
 })
 
 //listen\\
-var port = 3000
+var port = 80
 app.listen(port, function(){
 	console.log('server running on port ' + port)
 })
