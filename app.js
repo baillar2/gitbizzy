@@ -82,8 +82,8 @@ app.get('/getUser', function(req, res){
 	})
 
 app.get('/logout', function(req, res){
-	req.logout(),
-	res.redirect('/')
+    req.logout()
+    res.redirect('/')
 })
 // app.post('/api/newuser', function(req, res){
 // 	controller.newUser(req, res)
@@ -104,7 +104,7 @@ app.get('/api/getcard/:login', function(req, res){
 })
 
 //listen\\
-var port = 80
+var port = 3000
 app.listen(port, function(){
 	console.log('server running on port ' + port)
 })
