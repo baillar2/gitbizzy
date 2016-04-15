@@ -1,23 +1,23 @@
 
 	<div class="row">	
 		<form class="form-inline">
-			<div class="form-group">
+			<div class="form-group margin">
 				<label>Name</label>
 				<input type="text" class="form-control" placeholder="{{user.name}}" ng-model="user.name">
 			</div>
-			<div class="form-group">
+			<div class="form-group margin">
 				<label>Company</label>
 				<input type="text" class="form-control" placeholder="{{user.company}}" ng-model="user.company">
 			</div>
-			<div class="form-group">
+			<div class="form-group margin">
 				<label>Location</label>
 				<input type="text" class="form-control" placeholder="{{user.location}}" ng-model="user.location">
 			</div>
-			<div class="form-group">
+			<div class="form-group margin">
 				<label>Email</label>
 				<input type="text" class="form-control" placeholder="{{user.email}}" ng-model="user.email">
 			</div>
-			<div class="form-group">
+			<div class="form-group margin">
 				<label>GitHub</label>
 				<input type="text" class="form-control" placeholder="{{user.github}}" ng-model="user.github">
 			</div>
@@ -27,11 +27,14 @@
 	<div class="row">
 		<div class="col-xs-10 col-xs-offset-1 card">
 			<img class="avatar" src="{{user.avatar}}">
-			<h2 class="inline">{{user.name}}</h2>
-			<h4 class="margin">{{user.company}}</h4>
-			<h5 class="margin">{{user.location}}</h5>
-			<h5 class="margin">{{user.email}}</h5>
-			<h5 class="margin">{{user.github}}</h5>
+			<div style="float:right">
+				<h2 class="margin">{{user.name}}</h2>
+				<h4 class="margin">{{user.company}}</h4>
+				<h5 class="margin">{{user.location}}</h5>
+				<h5 class="margin">{{user.email}}</h5>
+				<h5 class="margin">{{user.github}}</h5>
+				<p>This card can be viewed at <a href="http://gitbizzy.com/{{user.login}}">gitbizzy.com/{{user.login}}</a></p>
+			</div>	
 		</div>	
 	</div>	
 	

@@ -5,6 +5,7 @@
 	background-color: #B2DFDB;
 	height: 100px;
 	width: 100%;
+	vertical-align: middle;
 }
 .title {
 	color: #00796B;
@@ -12,18 +13,26 @@
 	font-size: 54px;
 }
 
+label {
+	width: 70px;
+}
+p {
+	color:#727272;
+}
 .card {
 	border: medium solid #536DFE;
 	border-radius: 15px;
 	padding: 5%;
 	background-color: #FFFFFF;
-	min-height: 300px;
-	max-height: 500px;	
+	width: 600px;
+	max-height: 500px;
+	margin:5px;	
+	color: #212121;
 }
 
 .avatar {
 	height: 200px;
-	border:thin solid black;
+	border:thin solid #536DFE;
 	border-radius: 5px;
 }
 
@@ -34,7 +43,7 @@
 	text-align: center;
 }
 .margin {
-	margin-top: 5%;
-	margin-bottom: 5%;
+	margin: 7px 5px 7px 5px;
+	
 }
 
