@@ -5,12 +5,12 @@
 	background-color: #B2DFDB;
 	height: 100px;
 	width: 100%;
-	vertical-align: middle;
 }
 .title {
 	color: #00796B;
 	text-align: center;
 	font-size: 54px;
+	vertical-align: middle;
 }
 
 label {
