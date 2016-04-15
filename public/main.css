@@ -1,7 +1,24 @@
+.body {
+	background-color: #B6B6B6;
+}
+.header {
+	background-color: #B2DFDB;
+	height: 100px;
+	width: 100%;
+}
+.title {
+	color: #00796B;
+	text-align: center;
+	font-size: 54px;
+}
+
 .card {
-	border: medium solid black;
+	border: medium solid #536DFE;
 	border-radius: 15px;
-	padding: 5%;	
+	padding: 5%;
+	background-color: #FFFFFF;
+	min-height: 300px;
+	max-height: 500px;	
 }
 
 .avatar {
@@ -13,7 +30,9 @@
 .inline {
 	display: inline;
 }
-
+.center {
+	text-align: center;
+}
 .margin {
 	margin-top: 5%;
 	margin-bottom: 5%;

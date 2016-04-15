@@ -3,31 +3,21 @@ angular.module('app')
 
 		var s = $scope
 		
-		s.getInfo = function(){
-			console.log(s.login)
-			$http.get('https://api.github.com/users/' + s.login.name)
-				.then(function(serverData){
-					$http.post('/api/newuser', serverData.data)
-						.then(function(serverData){
-							console.log(serverData.data)
-							s.user = serverData.data
-							console.log('saved user', s.user)
-						})
+		// s.getInfo = function(){
+		// 	console.log(s.login)
+		// 	$http.get('https://api.github.com/users/' + s.login.name)
+		// 		.then(function(serverData){
+		// 			$http.post('/api/newuser', serverData.data)
+		// 				.then(function(serverData){
+		// 					console.log(serverData.data)
+		// 					s.user = serverData.data
+		// 					console.log('saved user', s.user)
+		// 				})
 
-				})
-				s.login = {}
-		}
-		s.submit = function(){
-			console.log('submit fired', s.user)
-			$http.post('/api/update', s.user)
-				.then(function(serverData){
-					$http.post('/api/getUpdate', serverData.data)
-						.then(function(serverData){
-							console.log('got updated user', serverData.data)
-							s.user = serverData.data	
-						})
-				})
-		}
+		// 		})
+		// 		s.login = {}
+		// }
+		
 
 	}])
 angular.module('app')
@@ -41,6 +31,18 @@ angular.module('app')
 				s.user = serverData.data
 				console.log('user to be used', s.user)
 			})
+
+		s.submit = function(){
+			console.log('submit fired', s.user)
+			$http.post('/api/update', s.user)
+				.then(function(serverData){
+					$http.post('/api/getUpdate', serverData.data)
+						.then(function(serverData){
+							console.log('got updated user', serverData.data)
+							s.user = serverData.data	
+						})
+				})
+		}	
 	}])
 angular.module('app')
 	.controller('cardControl', ['$scope', '$http', function($scope, $http){
