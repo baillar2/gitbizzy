@@ -3,25 +3,11 @@ angular.module('app')
 
 		var s = $scope
 		
-		// s.getInfo = function(){
-		// 	console.log(s.login)
-		// 	$http.get('https://api.github.com/users/' + s.login.name)
-		// 		.then(function(serverData){
-		// 			$http.post('/api/newuser', serverData.data)
-		// 				.then(function(serverData){
-		// 					console.log(serverData.data)
-		// 					s.user = serverData.data
-		// 					console.log('saved user', s.user)
-		// 				})
-
-		// 		})
-		// 		s.login = {}
-		// }
 		
 
 	}])
 angular.module('app')
-	.controller('formControl', ['$scope', '$http', function($scope, $http){
+	.controller('formControl', ['$scope', '$http', 'Upload', function($scope, $http, Upload){
 
 		var s = $scope
 		console.log('getuser fired')
@@ -31,6 +17,19 @@ angular.module('app')
 				s.user = serverData.data
 				console.log('user to be used', s.user)
 			})
+
+		s.submit = function(){
+			console.log('submit fired')
+			var file = s.user.file || null
+			var uploader = Upload.upload({
+				url:'/api/update',
+				data: s.user
+			})
+			uploader.then(function(serverData){
+				console.log('got updated user', serverData.data)
+				s.user = serverData.data
+			})
+		}
 
 		s.submit = function(){
 			console.log('submit fired', s.user)

@@ -1,5 +1,12 @@
 var User = require('../models/users.js')
-
+var s3 = require('s3')
+var key = require('../models/key.js')
+s3Client = s3.createClient({
+	s3options:{
+		accessKeyId: key.accessKeyId, 
+		secretAccessKey: key.secretAccessKey,
+	}
+})
 function newUser(profile){
 	var person = new User ({
 		name : profile.displayName, 
@@ -21,17 +28,70 @@ function newUser(profile){
 	})
 	return person
 }
+// function updateUser(req, res){
+// 	console.log('controller log')
+// 	User.findByIdAndUpdate({_id:req.body._id}, req.body, function(err, user){
+// 		if(err){
+// 			console.log('update error', err)
+// 		}
+// 		else{
+// 			console.log('user updated', user)
+// 			res.json(user)
+// 		}
+// 	})
 function updateUser(req, res){
-	console.log('controller log')
-	User.findByIdAndUpdate({_id:req.body._id}, req.body, function(err, user){
-		if(err){
-			console.log('update error', err)
+	if(req.file.data){
+		console.log('update user file', req.files)
+		var body = req.body.data
+		var file = req.fules.data.file
+		var uploader = s3Client.uploadFile({
+			localFile.file.path, 
+			s3Params: {
+				Bucket: 'gitbizzy', 
+				Key: file.name, 
+				ACL: 'public-read',
+			}
+		})
+		uploader.on('progress', function(){
+			console.log('progress', uploader.progressAmount, uploader.progressTotal)
+		})
+		uploader.on('end', function(){
+			var url = s3.getPublicUrlHttp('gitbizzy', file.name)
+			console.log('url retrieved', url)
+			User.findByIdAndUpdate({_id:body._id}, $set{
+				name : body.name, 
+				company : body.company, 
+				blog: body.blog, 
+				location: body.location, 
+				email: body.email, 
+				avatar: url, 
+				github: body.profileUrl,
+				login: body.username	
+			}
+			function(err, user){
+				if(err){
+					console.log('update err', err)
+				}
+				else{
+					console.log('user updated', user)
+					res.json(user)
+				}
+			})
+		})
+		else {
+			console.log('no picture to update')
+			User.findByIdAndUpdate({_id:req.body.data._id}, req.body.data, function(err, user){
+				if(err){
+					console.log('update error', err)
+				}
+				else {
+					console.log('user updated', user)
+					res.json(user)
+				}
+			})
 		}
-		else{
-			console.log('user updated', user)
-			res.json(user)
-		}
-	})
+	}
+}
 }function getUpdate(req, res){
 	User.findOne({_id:req.body._id}, function(err, user){
 		if(err){

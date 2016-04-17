@@ -2,6 +2,10 @@
 	<div class="row">	
 		<form class="form-inline">
 			<div class="form-group margin">
+				<label>Picture</label>
+				<input type="file" class="form-control" ngf-pattern="'image/*" ngf-accept="'iamage/*'" ngf-select ng-model="user.file">
+			</div>
+			<div class="form-group margin">
 				<label>Name</label>
 				<input type="text" class="form-control" placeholder="{{user.name}}" ng-model="user.name">
 			</div>
