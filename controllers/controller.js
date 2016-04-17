@@ -45,7 +45,7 @@ function updateUser(req, res){
 		var body = req.body.data
 		var file = req.files.data.file
 		var uploader = s3Client.uploadFile({
-			localFile.file.path, 
+			localFile: file.path, 
 			s3Params: {
 				Bucket: 'gitbizzy', 
 				Key: file.name, 
