@@ -43,7 +43,7 @@ function updateUser(req, res){
 	if(req.file.data){
 		console.log('update user file', req.files)
 		var body = req.body.data
-		var file = req.fules.data.file
+		var file = req.files.data.file
 		var uploader = s3Client.uploadFile({
 			localFile.file.path, 
 			s3Params: {
